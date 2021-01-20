@@ -58,7 +58,7 @@ class Config {
 
  private:
   void LoadFile(const string& filePath) {
-    ifstream ifs(filePath.c_str());
+    ifstream ifs(Utf8Path(filePath));
     assert(ifs);
     string line;
     vector<string> vecBuf;

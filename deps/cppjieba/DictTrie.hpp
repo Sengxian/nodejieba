@@ -14,6 +14,7 @@
 #include "limonp/Logging.hpp"
 #include "Unicode.hpp"
 #include "Trie.hpp"
+#include "Utf8Path.hpp"
 
 namespace cppjieba {
 
@@ -142,7 +143,7 @@ class DictTrie {
     vector<string> files = limonp::Split(filePaths, "|;");
     size_t lineno = 0;
     for (size_t i = 0; i < files.size(); i++) {
-      ifstream ifs(files[i].c_str());
+      ifstream ifs(Utf8Path(files[i]));
       XCHECK(ifs.is_open()) << "open " << files[i] << " failed"; 
       string line;
       
@@ -199,7 +200,7 @@ class DictTrie {
   }
 
   void LoadDict(const string& filePath) {
-    ifstream ifs(filePath.c_str());
+    ifstream ifs(Utf8Path(filePath));
     XCHECK(ifs.is_open()) << "open " << filePath << " failed.";
     string line;
     vector<string> buf;

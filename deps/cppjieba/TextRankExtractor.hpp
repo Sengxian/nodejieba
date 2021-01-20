@@ -163,7 +163,7 @@ namespace cppjieba {
     }
   private:
     void LoadStopWordDict(const string& filePath) {
-      ifstream ifs(filePath.c_str());
+      ifstream ifs(Utf8Path(filePath));
       XCHECK(ifs.is_open()) << "open " << filePath << " failed";
       string line ;
       while (getline(ifs, line)) {
