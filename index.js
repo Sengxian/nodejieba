@@ -5,12 +5,20 @@ var nodejieba = require(binding_path);
 
 var isDictLoaded = false;
 
-var exports ={
-  DEFAULT_DICT: __dirname + "/dict/jieba.dict.utf8",
-  DEFAULT_HMM_DICT: __dirname + "/dict/hmm_model.utf8",
-  DEFAULT_USER_DICT: __dirname + "/dict/user.dict.utf8",
-  DEFAULT_IDF_DICT: __dirname + "/dict/idf.utf8",
-  DEFAULT_STOP_WORD_DICT: __dirname + "/dict/stop_words.utf8",
+function replaceLast(str, from, to) {
+  const splitted = str.split(from);
+  const afterLast = splitted.pop();
+  return splitted.join(from) + to + afterLast;
+}
+
+const unpackedDirname = replaceLast(__dirname, "app.asar", "app.asar.unpacked");
+
+var exports = {
+  DEFAULT_DICT: unpackedDirname + "/dict/jieba.dict.utf8",
+  DEFAULT_HMM_DICT: unpackedDirname + "/dict/hmm_model.utf8",
+  DEFAULT_USER_DICT: unpackedDirname + "/dict/user.dict.utf8",
+  DEFAULT_IDF_DICT: unpackedDirname + "/dict/idf.utf8",
+  DEFAULT_STOP_WORD_DICT: unpackedDirname + "/dict/stop_words.utf8",
 
   load: function (dictJson) {
     if (!dictJson) {
