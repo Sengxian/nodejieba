@@ -7,6 +7,7 @@ var isDictLoaded = false;
 
 function replaceLast(str, from, to) {
   const splitted = str.split(from);
+  if (splitted.length === 1) return str;
   const afterLast = splitted.pop();
   return splitted.join(from) + to + afterLast;
 }
